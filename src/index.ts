@@ -11,8 +11,20 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+import { PrismaClient } from '@prisma/client/extension';
+
+PrismaClient;
+
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		return new Response('Hello World!');
+		const Prisma = new PrismaClient();
+		const user = await Prisma.user.create({
+			data: {
+				email: 'elsa@prisma.io',
+				name: 'Elsa Prisma',
+			},
+		});
+		const stringJSON = JSON.stringify(user);
+		return new Response(stringJSON);
 	},
 };

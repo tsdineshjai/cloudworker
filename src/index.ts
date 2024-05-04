@@ -13,8 +13,6 @@
 
 import { PrismaClient } from '@prisma/client/extension';
 
-PrismaClient;
-
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		const Prisma = new PrismaClient();
